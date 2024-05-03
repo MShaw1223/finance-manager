@@ -1,10 +1,9 @@
 "use client";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import SignUpForm from "./signupForm";
 import { useRouter } from "next/navigation";
 
 export default function SignUp() {
-  const [signIn, setSignIn] = useState(false);
   const router = useRouter();
   const handler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,9 +20,10 @@ export default function SignUp() {
         "Content-Type": "application/json",
       },
     });
-    const user_id = res.json();
+    const response = await res.json();
+    const user_id = response.uid;
+    console.log(user_id);
     if (res.ok) {
-      setSignIn(true);
       router.push(`/${user_id}`);
     }
   };

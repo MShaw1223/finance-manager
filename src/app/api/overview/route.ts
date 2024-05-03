@@ -7,8 +7,6 @@ export async function POST(req: NextRequest) {
   try {
     const body = await extractBody(req);
     const { id } = body;
-    console.log(body);
-    console.log(id);
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,
     });
@@ -17,12 +15,10 @@ export async function POST(req: NextRequest) {
     ]);
     const done = await pool.query(sqlStatement);
     await pool.end();
-    console.log(done);
-    console.log("hello.ts data: ", done);
     const returnArray = done.rows.map((row) => row);
     return NextResponse.json({ returnArray }, { status: 200 });
   } catch (error) {
-    console.error("Error in hello", error);
+    return NextResponse.json(`Error in overview: ${error}`, { status: 500 });
   }
 }
 export async function GET() {
