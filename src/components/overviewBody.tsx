@@ -1,14 +1,10 @@
 "use client";
 import { URLParam, usersData } from "@/utils/types";
 import { useEffect, useState } from "react";
-import { ModeToggle } from "./ui/themeToggle";
-import { MdArrowBack } from "react-icons/md";
-import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
+import FileRd from "./fileRead";
 
 export default function OverviewBody({ params }: URLParam) {
-  const router = useRouter();
-  const [data, setData] = useState<usersData[]>([]);
+  // const [data, setData] = useState<usersData[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function getData() {
@@ -22,42 +18,21 @@ export default function OverviewBody({ params }: URLParam) {
       });
       const newData = await res.json();
       const set: usersData[] = newData.returnArray;
-      setData(set);
+      // setData(set);
       setLoading(false);
     }
     getData();
   }, []);
   return (
     <>
-      <nav>
-        <div className="flex flex-row justify-between">
-          <h1 className="p-3 text-3xl">Data</h1>
-          <div className="flex flex-row">
-            <div className="p-3">
-              <Button variant="outline" onClick={() => router.push("/")}>
-                <MdArrowBack />
-              </Button>
-            </div>
-            <div className="p-3">
-              <ModeToggle />
-            </div>
-          </div>
-        </div>
-      </nav>
       {loading ? (
         <h1 className="text-center">Loading...</h1>
       ) : (
-        data &&
-        data.map((dat) => (
-          <div key={dat.uid} className="p-3 text-center">
-            <h1>User id: {dat.uid}</h1>
-            <h1>{dat.username}</h1>
-
-            <h1>{dat.email}</h1>
-
-            {/* {dat.user_password} */}
+        <div className="p-3 text-center">
+          <div className="p-2 m-2">
+            <FileRd />
           </div>
-        ))
+        </div>
       )}
     </>
   );
