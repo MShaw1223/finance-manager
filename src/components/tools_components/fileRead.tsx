@@ -1,7 +1,7 @@
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 
-export default function FileRd() {
+export const FileRead = () => {
   async function searchForCSV(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -34,4 +34,4 @@ export default function FileRd() {
       </div>
     </>
   );
-}
+};
