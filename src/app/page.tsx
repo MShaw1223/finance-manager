@@ -4,9 +4,9 @@ import Login from "../components/login";
 import Signup from "../components/signup";
 import { Button } from "@/components/ui/button";
 import { NavBar } from "@/components/navBar";
-import { URLParam } from "@/utils/types";
+import { Params } from "@/utils/types";
 
-export default function main({ params }: URLParam) {
+export default function main({ params }: Params) {
   const [isNew, setNew] = useState<boolean>(false);
   return (
     <>

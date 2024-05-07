@@ -4,6 +4,7 @@ export type usersData = {
   email: string;
   user_password: string;
 };
-export type URLParam = {
-  params: number;
+
+export type Params = {
+  params: { id: number };
 };

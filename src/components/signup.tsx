@@ -24,7 +24,7 @@ export default function SignUp() {
     const user_id = response.uid;
     console.log(user_id);
     if (res.ok) {
-      router.push(`/${user_id}`);
+      router.push(`/home/${user_id}`);
     }
   };
   return (

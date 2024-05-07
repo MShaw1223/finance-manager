@@ -1,27 +1,25 @@
 "use client";
-import { URLParam, usersData } from "@/utils/types";
+import { Params, usersData } from "@/utils/types";
 import { useEffect, useState } from "react";
 import { Separator } from "./ui/separator";
 
-export default function OverviewBody({ params }: URLParam) {
-  // const [data, setData] = useState<usersData[]>([]);
+export default function OverviewBody({ params }: Params) {
+  const [data, setData] = useState<usersData[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    async function get_data() {
-      const user_id = params!;
-      const res = await fetch("/api/overview", {
-        method: "POST",
-        body: JSON.stringify(user_id),
+    async function get_users() {
+      const res = await fetch(`/home/${params.id}/api`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const newData = await res.json();
       const set: usersData[] = newData.returnArray;
-      // setData(set);
+      setData(set);
       setLoading(false);
     }
-    get_data();
+    get_users();
   }, []);
   return (
     <>
@@ -49,6 +47,24 @@ export default function OverviewBody({ params }: URLParam) {
                 <h1>*Data*</h1>
               </div>
             </div>
+          </div>
+          <div>
+            {data ? (
+              data.map((data) => (
+                <>
+                  <div>
+                    <div key={data.uid}>
+                      <h1>{data.username}</h1>
+                      <h1>{data.email}</h1>
+                    </div>
+                  </div>
+                </>
+              ))
+            ) : (
+              <>
+                <h1>No data</h1>
+              </>
+            )}
           </div>
         </div>
       )}

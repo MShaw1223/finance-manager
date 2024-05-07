@@ -1,10 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import OverviewBody from "@/components/overviewBody";
-import { URLParam } from "@/utils/types";
+import { Params } from "@/utils/types";
 import { ToolsPage } from "./tools";
-import { EntryPage } from "./entryPage";
+import EntryPage from "./entryPage";
 
-export default function TabBar({ params }: URLParam) {
+export default function TabBar({ params }: Params) {
   return (
     <>
       <Tabs defaultValue="overview" className="w-full items-center p-1">
@@ -17,7 +17,7 @@ export default function TabBar({ params }: URLParam) {
           <OverviewBody params={params} />
         </TabsContent>
         <TabsContent value="entry">
-          <EntryPage />
+          <EntryPage params={params} />
         </TabsContent>
         <TabsContent value="tools">
           <ToolsPage params={params} />

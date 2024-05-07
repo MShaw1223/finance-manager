@@ -21,9 +21,8 @@ export default function Login() {
     });
     const response = await res.json();
     const user_id = response.uid;
-    console.log(user_id);
     if (res.ok) {
-      router.push(`/${user_id}`);
+      router.push(`/home/${user_id}`);
     }
   };
   return (

@@ -3,10 +3,10 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { MdArrowBack } from "react-icons/md";
 import { ModeToggle } from "./ui/themeToggle";
-import { URLParam } from "@/utils/types";
+import { Params } from "@/utils/types";
 import { useEffect, useState } from "react";
 
-export const NavBar = ({ params }: URLParam) => {
+export const NavBar = ({ params }: Params) => {
   const [data, setData] = useState<string>("");
   useEffect(() => {
     async function get_data() {
@@ -26,6 +26,7 @@ export const NavBar = ({ params }: URLParam) => {
   }, []);
   return (
     <>
+      <title>Overview</title>
       <nav>
         <div className="flex flex-row justify-between">
           <h1 className="p-3 text-3xl">{data ? `${data}'s Financials` : ""}</h1>

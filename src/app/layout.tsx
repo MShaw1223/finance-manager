@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/components/themeProvider";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: "Finance Manager",
@@ -22,6 +23,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
