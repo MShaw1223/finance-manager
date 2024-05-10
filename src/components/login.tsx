@@ -23,10 +23,13 @@ export default function Login() {
     const user_id = response.uid;
     if (res.ok) {
       router.push(`/home/${user_id}`);
+    } else {
+      alert("Unable to log in");
     }
   };
   return (
     <>
+      <title>Login</title>
       <LoginForm FormHandler={handler} />
     </>
   );

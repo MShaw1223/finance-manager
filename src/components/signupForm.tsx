@@ -13,7 +13,6 @@ export default function SignUpForm({ FormHandler }: SignUpFormProps) {
     <>
       <div className="flex">
         <form onSubmit={FormHandler}>
-          <h1 className="py-3">Sign Up</h1>
           <div className="flex flex-col p-2 space-y-4">
             <Input type="text" name="username" placeholder="Username..." />
             <div className="flex flex-row space-x-2">
@@ -23,6 +22,7 @@ export default function SignUpForm({ FormHandler }: SignUpFormProps) {
                 placeholder="Password..."
               />
               <Button
+                type="button"
                 variant="outline"
                 onClick={() => setShowPassword(!showPassword)}
               >
@@ -33,7 +33,7 @@ export default function SignUpForm({ FormHandler }: SignUpFormProps) {
           </div>
           <div className="m-2">
             <Button variant="secondary" type="submit">
-              SignUp
+              Sign Up
             </Button>
           </div>
         </form>

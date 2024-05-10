@@ -11,18 +11,34 @@ export default function main({ params }: Params) {
   return (
     <>
       <NavBar params={params} />
-      <div className="flex text-center">
+      <div className="flex mt-28 text-center p-3">
         <div className="flex flex-col mx-auto my-auto">
-          <div className="flex-row mx-auto space-x-2">
-            <Button variant="secondary" onClick={() => setNew(false)}>
-              login
+          <div className="flex-row space-x-2 p-3">
+            <Button
+              variant="ghost"
+              onClick={() => setNew(false)}
+              className={
+                !isNew
+                  ? "underline underline-offset-[13px] hover:no-underline"
+                  : ""
+              }
+            >
+              Log In
             </Button>
-            <Button variant="secondary" onClick={() => setNew(true)}>
-              sign up
+            <Button
+              variant="ghost"
+              onClick={() => setNew(true)}
+              className={
+                isNew
+                  ? "underline underline-offset-[13px] hover:no-underline"
+                  : ""
+              }
+            >
+              Sign Up
             </Button>
           </div>
-          <div>
-            {!isNew ? <Login /> : isNew ? <Signup /> : <h1>Loading...</h1>}
+          <div className="m-2 p-2 border border-input rounded-md">
+            {!isNew ? <Login /> : <Signup />}
           </div>
         </div>
       </div>

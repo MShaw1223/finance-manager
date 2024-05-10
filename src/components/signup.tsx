@@ -13,22 +13,29 @@ export default function SignUp() {
       user_password: data.get("password") as string,
       email: data.get("email") as string,
     };
-    const res = await fetch("/api/signup", {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const response = await res.json();
-    const user_id = response.uid;
-    console.log(user_id);
-    if (res.ok) {
-      router.push(`/home/${user_id}`);
+    if (
+      payload.email !== "" ||
+      payload.user_password !== "" ||
+      payload.username !== ""
+    ) {
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response = await res.json();
+      const user_id = response.uid;
+      console.log(user_id);
+      if (res.ok) {
+        router.push(`/home/${user_id}`);
+      }
     }
   };
   return (
     <>
+      <title>Sign-up</title>
       <SignUpForm FormHandler={handler} />
     </>
   );

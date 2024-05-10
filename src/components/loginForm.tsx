@@ -13,8 +13,7 @@ export default function LoginForm({ FormHandler }: LoginFormProps) {
     <>
       <div className="flex">
         <form onSubmit={FormHandler}>
-          <h1 className="py-3">Login</h1>
-          <div className="flex flex-col p-2 space-y-4">
+          <div className="flex flex-col p-2 space-y-4 mb-16">
             <Input type="text" name="username" placeholder="Username..." />
             <div className="space-x-2 flex flex-row">
               <Input
@@ -23,6 +22,7 @@ export default function LoginForm({ FormHandler }: LoginFormProps) {
                 placeholder="Password..."
               />
               <Button
+                type="button"
                 variant="outline"
                 onClick={() => setShowPassword(!showPassword)}
               >
