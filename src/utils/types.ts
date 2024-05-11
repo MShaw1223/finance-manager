@@ -8,3 +8,8 @@ export type usersData = {
 export type Params = {
   params: { id: number };
 };
+
+export type CardData = {
+  cid: number;
+  card_name: string;
+};

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import Login from "../components/login";
-import Signup from "../components/signup";
+import Login from "../components/login/login";
+import Signup from "../components/signup/signup";
 import { Button } from "@/components/ui/button";
 import { NavBar } from "@/components/navBar";
 import { Params } from "@/utils/types";

@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent } from "react";
-import SignUpForm from "./signupForm";
 import { useRouter } from "next/navigation";
+import SignUpForm from "./signupForm";
 
 export default function SignUp() {
   const router = useRouter();
@@ -27,7 +27,6 @@ export default function SignUp() {
       });
       const response = await res.json();
       const user_id = response.uid;
-      console.log(user_id);
       if (res.ok) {
         router.push(`/home/${user_id}`);
       }

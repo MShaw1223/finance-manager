@@ -1,7 +1,7 @@
 "use client";
-import { Params, usersData } from "@/utils/types";
+import { CardData, Params, usersData } from "@/utils/types";
 import { useEffect, useState } from "react";
-import { Separator } from "./ui/separator";
+import { Separator } from "../ui/separator";
 
 export default function OverviewBody({ params }: Params) {
   const [data, setData] = useState<usersData[]>([]);
@@ -51,14 +51,10 @@ export default function OverviewBody({ params }: Params) {
           <div>
             {data ? (
               data.map((data) => (
-                <>
-                  <div>
-                    <div key={data.uid}>
-                      <h1>{data.username}</h1>
-                      <h1>{data.email}</h1>
-                    </div>
-                  </div>
-                </>
+                <div key={data.uid}>
+                  <h1>Username: {data.username}</h1>
+                  <h1>Email: {data.email}</h1>
+                </div>
               ))
             ) : (
               <>

@@ -1,21 +1,21 @@
 "use client";
 import { FormEvent, useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
-interface SignUpFormProps {
+interface LoginFormProps {
   FormHandler: (e: FormEvent<HTMLFormElement>) => void;
 }
 
-export default function SignUpForm({ FormHandler }: SignUpFormProps) {
+export default function LoginForm({ FormHandler }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <>
       <div className="flex">
         <form onSubmit={FormHandler}>
-          <div className="flex flex-col p-2 space-y-4">
+          <div className="flex flex-col p-2 space-y-4 mb-16">
             <Input type="text" name="username" placeholder="Username..." />
-            <div className="flex flex-row space-x-2">
+            <div className="space-x-2 flex flex-row">
               <Input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -29,11 +29,10 @@ export default function SignUpForm({ FormHandler }: SignUpFormProps) {
                 {showPassword ? "Hide" : "Show"}
               </Button>
             </div>
-            <Input type="text" name="email" placeholder="Email..." />
           </div>
           <div className="m-2">
-            <Button variant="secondary" type="submit">
-              Sign Up
+            <Button type="submit" variant="secondary">
+              Log In
             </Button>
           </div>
         </form>

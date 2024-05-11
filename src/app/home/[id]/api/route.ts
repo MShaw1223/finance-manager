@@ -13,7 +13,9 @@ export async function GET(req: NextRequest, { params }: Params) {
       "select uid,username,email from users where uid = ?",
       [id]
     );
+
     const done = await pool.query(sqlStatement);
+
     await pool.end();
     const returnArray = done.rows.map((row) => row);
     return NextResponse.json({ returnArray }, { status: 200 });
