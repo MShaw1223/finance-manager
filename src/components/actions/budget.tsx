@@ -1,6 +1,6 @@
 import { CardData, Params } from "@/utils/types";
 import { FormEvent, useEffect, useState } from "react";
-import CardSelector from "./selectCard";
+import CardSelector from "../selectCard";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
@@ -71,7 +71,7 @@ export const BudgetSetter = ({ params }: Params) => {
               value={budgetAmount}
               onChange={(e) => setBudgetAmount(e.target.value)}
             />
-            <Button type="submit">Add Budget</Button>
+            <Button type="submit">Add</Button>
           </div>
         </form>
       </div>

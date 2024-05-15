@@ -5,9 +5,8 @@ import { Params } from "@/utils/types";
 export default async function Overview({ params }: Params) {
   return (
     <>
-      <title>Overview</title>
       <NavBar params={params} />
-      <div className="mx-auto">
+      <div className="flex">
         <TabBar params={params} />
       </div>
     </>

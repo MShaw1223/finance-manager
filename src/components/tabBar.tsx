@@ -7,7 +7,7 @@ import ActionsPage from "./actions/actionsPage";
 export default function TabBar({ params }: Params) {
   return (
     <>
-      <Tabs defaultValue="overview" className="w-full items-center p-1">
+      <Tabs defaultValue="overview" className="w-full p-1">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="actions">Actions</TabsTrigger>

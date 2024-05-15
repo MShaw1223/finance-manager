@@ -30,7 +30,7 @@ export const FileRead = () => {
             onChange={searchForCSV}
           />
         </form>
-        <Textarea id="output" />
+        <Textarea id="output" placeholder="Click on choose file" />
       </div>
     </>
   );

@@ -1,7 +1,6 @@
 "use client";
 import { CardData, Params, usersData } from "@/utils/types";
 import { useEffect, useState } from "react";
-import { Separator } from "../ui/separator";
 
 export default function OverviewBody({ params }: Params) {
   const [data, setData] = useState<usersData[]>([]);
@@ -23,31 +22,23 @@ export default function OverviewBody({ params }: Params) {
   }, []);
   return (
     <>
+      <title>Overview</title>
       {loading ? (
         <h1 className="text-center">Loading...</h1>
       ) : (
         <div className="p-2 m-2">
-          <div className="flex">
-            <div className="flex flex-row space-x-5 mx-auto">
-              <div className="flex flex-col text-center">
-                <h1>Running Spend</h1>
-                <Separator />
-                <h1>*Data*</h1>
-              </div>
-              <Separator orientation="vertical" />
-              <div className="flex flex-col text-center">
-                <h1>Most used card</h1>
-                <Separator />
-                <h1>*Data*</h1>
-              </div>
-              <Separator orientation="vertical" />
-              <div className="flex flex-col text-center">
-                <h1>Most recurring visits</h1>
-                <Separator />
-                <h1>*Data*</h1>
-              </div>
-            </div>
-          </div>
+          <table className="text-center">
+            <tr>
+              <td className="border-b p-2">Running Spend</td>
+              <td className="border-b border-x p-2">Most used card</td>
+              <td className="border-b p-2">Most recurring visits</td>
+            </tr>
+            <tr>
+              <td className="border-t p-2">*Data*</td>
+              <td className="border-t border-x p-2">*Data*</td>
+              <td className="border-t p-2">*Data*</td>
+            </tr>
+          </table>
           <div>
             {data ? (
               data.map((data) => (

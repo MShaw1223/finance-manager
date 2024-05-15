@@ -3,9 +3,10 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "./ui/select";
 
 interface CardSelectorProps {
   cards: CardData[];
@@ -25,19 +26,28 @@ export default function CardSelector({
       handleChange(JSON.stringify(selectedCard));
     }
   };
-
   return (
-    <Select onValueChange={handleCardChange}>
-      <SelectTrigger>
-        <SelectValue placeholder="Cards" />
-      </SelectTrigger>
-      <SelectContent>
-        {cards.map((card) => (
-          <SelectItem key={card.cid} value={String(card.cid)}>
-            {card.card_name}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <>
+      {cards.length === 0 ? (
+        <Select>
+          <SelectTrigger>
+            <SelectValue placeholder="Cards" />
+          </SelectTrigger>
+        </Select>
+      ) : (
+        <Select onValueChange={handleCardChange}>
+          <SelectTrigger>
+            <SelectValue placeholder="Cards" />
+          </SelectTrigger>
+          <SelectContent>
+            {cards.map((card) => (
+              <SelectItem key={card.cid} value={String(card.cid)}>
+                {card.card_name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
+    </>
   );
 }
