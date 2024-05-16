@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
 
-export const BudgetSetter = ({ params }: Params) => {
+export const Spend = ({ params }: Params) => {
   const [data, setData] = useState<CardData[]>([]);
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
   const [selectedCardName, setSelectedCardName] = useState<string>("");
@@ -28,7 +28,7 @@ export const BudgetSetter = ({ params }: Params) => {
   async function handler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.target as HTMLFormElement);
-    const addBudget = await fetch("/api/tools_page", {
+    const addBudget = await fetch("", {
       method: "POST",
       body: JSON.stringify({
         amount: parseInt(data.get("amount")! as string),

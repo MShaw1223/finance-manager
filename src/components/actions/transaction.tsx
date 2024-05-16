@@ -4,12 +4,14 @@ import CardSelector from "../selectCard";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
+import TransactionOption from "./selectTransaction";
 
-export const BudgetSetter = ({ params }: Params) => {
+export const Transactions = ({ params }: Params) => {
   const [data, setData] = useState<CardData[]>([]);
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
   const [selectedCardName, setSelectedCardName] = useState<string>("");
-  const [budgetAmount, setBudgetAmount] = useState<string>("");
+  const [transactionAmount, setTransactionAmount] = useState<string>("");
+  const [TOption, setOption] = useState<string>("");
 
   const id = params.id!;
   useEffect(() => {
@@ -25,12 +27,13 @@ export const BudgetSetter = ({ params }: Params) => {
     }
     get_data();
   }, []);
-  async function handler(e: FormEvent<HTMLFormElement>) {
+  async function formHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.target as HTMLFormElement);
-    const addBudget = await fetch("/api/tools_page", {
+    const addBudget = await fetch("", {
       method: "POST",
       body: JSON.stringify({
+        option: TOption,
         amount: parseInt(data.get("amount")! as string),
         cid: selectedCardId,
       }),
@@ -41,17 +44,18 @@ export const BudgetSetter = ({ params }: Params) => {
     if (!addBudget.ok) {
       toast({
         title: "Oops... Theres a problem",
-        description: "Unable to set budget due to a server error",
+        description: "Unable to record transaction due to a server error",
       });
     }
     if (addBudget.ok) {
       toast({
-        title: "Budget added successfully!",
-        description: `You can now limit spending on your ${selectedCardName} card`,
+        title: "Transaction recorded successfully!",
+        description: `Your transaction of ${123} on your ${selectedCardName} card to ${"John doe"} has been completed`,
       });
-      setBudgetAmount("");
+      setTransactionAmount("");
       setSelectedCardId(null);
       setSelectedCardName("");
+      setOption("");
     }
   }
   const handleCardChange = (cardString: string) => {
@@ -59,23 +63,28 @@ export const BudgetSetter = ({ params }: Params) => {
     setSelectedCardId(selectedCard.cid);
     setSelectedCardName(selectedCard.card_name);
   };
+  const handleOptionChange = (optString: string) => {
+    setOption(optString);
+  };
   return (
     <>
-      <div className="space-y-3">
-        <form onSubmit={handler}>
-          <div className="flex flex-row space-x-4">
-            <CardSelector cards={data} handleChange={handleCardChange} />
+      <form onSubmit={formHandler}>
+        <div className="flex flex-wrap space-x-2">
+          <div className="flex-grow space-y-2 text-center">
             <Input
               name="amount"
               placeholder="Amount"
-              value={budgetAmount}
-              onChange={(e) => setBudgetAmount(e.target.value)}
-              className="min-w-[100px] max-w-[200px]"
+              value={transactionAmount}
+              onChange={(e) => setTransactionAmount(e.target.value)}
             />
+            <div className="flex flex-row space-x-1">
+              <CardSelector cards={data} handleChange={handleCardChange} />
+              <TransactionOption handleChange={handleOptionChange} />
+            </div>
             <Button type="submit">Add</Button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </>
   );
 };

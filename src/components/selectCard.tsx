@@ -3,7 +3,6 @@ import {
   Select,
   SelectContent,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
@@ -30,13 +29,13 @@ export default function CardSelector({
     <>
       {cards.length === 0 ? (
         <Select>
-          <SelectTrigger>
+          <SelectTrigger className="min-w-[100px]">
             <SelectValue placeholder="Cards" />
           </SelectTrigger>
         </Select>
       ) : (
         <Select onValueChange={handleCardChange}>
-          <SelectTrigger>
+          <SelectTrigger className="min-w-[100px]">
             <SelectValue placeholder="Cards" />
           </SelectTrigger>
           <SelectContent>

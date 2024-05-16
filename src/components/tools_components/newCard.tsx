@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
 import { Params } from "@/utils/types";
 
-export default function NewCardForm({ params }: Params) {
+export const NewCardForm = ({ params }: Params) => {
   const [cardName, setCardName] = useState<string>("");
   async function handler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -50,4 +50,4 @@ export default function NewCardForm({ params }: Params) {
       </form>
     </>
   );
-}
+};

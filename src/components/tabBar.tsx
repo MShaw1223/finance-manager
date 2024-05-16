@@ -1,8 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Params } from "@/utils/types";
-import OverviewBody from "./overview/overviewBody";
-import { ToolsPage } from "./tools_components/tools";
-import ActionsPage from "./actions/actionsPage";
+import Tools from "./tools_components/tools";
+import Actions from "./actions/actions";
+import Overview from "./overview/overview";
 
 export default function TabBar({ params }: Params) {
   return (
@@ -14,13 +14,13 @@ export default function TabBar({ params }: Params) {
           <TabsTrigger value="tools">Tools</TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
-          <OverviewBody params={params} />
+          <Overview params={params} />
         </TabsContent>
         <TabsContent value="actions">
-          <ActionsPage params={params} />
+          <Actions params={params} />
         </TabsContent>
         <TabsContent value="tools">
-          <ToolsPage params={params} />
+          <Tools params={params} />
         </TabsContent>
       </Tabs>
     </>
