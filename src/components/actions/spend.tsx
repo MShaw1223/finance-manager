@@ -48,35 +48,39 @@ export const Spend = ({ params }: Params) => {
   }, []);
   async function handler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const addSpend = new helper(
-      "/api/addSpend",
-      "POST",
-      JSON.stringify({
-        location: location,
-        amount: parseFloat(spendAmount),
-        cid: selectedCardId,
-      })
-    );
-    const response = await addSpend.fetchFunc();
-    if (response.status !== 200) {
-      toast({
-        title: "Oops... Theres a problem",
-        description: "Unable to set budget due to a server error",
-      });
-      setSpendAmount("");
-      setSelectedCardId(null);
-      setSelectedCardName("");
-      setLocation("");
-    }
-    if (response.status === 200) {
-      toast({
-        title: "Spend recorded successfully!",
-        description: `You have recorded spending £${spendAmount} at ${location} on your ${selectedCardName} card`,
-      });
-      setSpendAmount("");
-      setSelectedCardId(null);
-      setSelectedCardName("");
-      setLocation("");
+    if (location !== "" && spendAmount !== "" && selectedCardId !== null) {
+      const addSpend = new helper(
+        "/api/addSpend",
+        "POST",
+        JSON.stringify({
+          location: location,
+          amount: parseFloat(spendAmount),
+          cid: selectedCardId,
+        })
+      );
+      const response = await addSpend.fetchFunc();
+      if (response.status !== 200) {
+        toast({
+          title: "Oops... Theres a problem",
+          description: "Unable to set budget due to a server error",
+        });
+        setSpendAmount("");
+        setSelectedCardId(null);
+        setSelectedCardName("");
+        setLocation("");
+      }
+      if (response.status === 200) {
+        toast({
+          title: "Spend recorded successfully!",
+          description: `You have recorded spending £${spendAmount} at ${location} on your ${selectedCardName} card`,
+        });
+        setSpendAmount("");
+        setSelectedCardId(null);
+        setSelectedCardName("");
+        setLocation("");
+      }
+    } else {
+      toast({ description: "Ensure all fields have been entered" });
     }
   }
   const handleCardChange = (cardString: string) => {
