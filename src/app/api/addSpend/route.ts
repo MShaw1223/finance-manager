@@ -1,7 +1,7 @@
 import { extractBody } from "@/utils/extractBody";
+import { Pool } from "@neondatabase/serverless";
 import { NextRequest, NextResponse } from "next/server";
 import sqlstring from "sqlstring";
-import { Pool } from "@neondatabase/serverless";
 
 export async function POST(req: NextRequest) {
   try {
@@ -9,17 +9,16 @@ export async function POST(req: NextRequest) {
       connectionString: process.env.DATABASE_URL,
     });
     const body = await extractBody(req);
-    console.log(body);
-    const { cid, amount } = body;
-    const sqlStatement = sqlstring.format(
-      "insert into budget (cid, amount) values (?, ?)",
-      [cid, amount]
+    const { location, amount, cid } = body;
+    const newSpend = sqlstring.format(
+      "insert into spend (amount, cid, spend_location) values (?, ?, ?)",
+      [amount, cid, location]
     );
-    await pool.query(sqlStatement);
+    await pool.query(newSpend);
     await pool.end();
     return NextResponse.json({ status: 200 });
-  } catch (error) {
-    return NextResponse.json(`Error in adding budget: ${error}`, {
+  } catch (e) {
+    return NextResponse.json(`Error in POST for new spend: ${e}`, {
       status: 500,
     });
   }

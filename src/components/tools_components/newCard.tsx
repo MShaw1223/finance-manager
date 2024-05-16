@@ -16,7 +16,7 @@ export const NewCardForm = ({ params }: Params) => {
       card_name,
       uid,
     };
-    const res = await fetch("/api/actions", {
+    const res = await fetch("/api/newCard", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {
@@ -38,14 +38,16 @@ export const NewCardForm = ({ params }: Params) => {
   return (
     <>
       <form onSubmit={handler}>
-        <div className="flex flex-row space-x-3">
-          <Input
-            name="cardName"
-            value={cardName}
-            onChange={(e) => setCardName(e.target.value)}
-            placeholder="New Card Name"
-          />
-          <Button type="submit">Add Card</Button>
+        <div className="flex flex-wrap">
+          <div className="flex-grow text-center space-y-4">
+            <Input
+              name="cardName"
+              value={cardName}
+              onChange={(e) => setCardName(e.target.value)}
+              placeholder="New Card Name"
+            />
+            <Button type="submit">Add Card</Button>
+          </div>
         </div>
       </form>
     </>

@@ -7,7 +7,7 @@ interface tableProps {
 export const OverviewTable = ({ tableData }: tableProps) => {
   return (
     <>
-      <table className="text-center">
+      <table className="text-center mx-auto min-w-full">
         <thead>
           <tr>
             <td className="border-b p-2">Running Spend</td>
