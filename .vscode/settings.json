@@ -1,13 +1,8 @@
 {
   "cSpell.words": ["Financials", "neondatabase", "Signup"],
   "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/Thumbs.db": true,
-    "**/README.md": true
+    "**/.next": true,
+    "**/node_modules": true
   },
   "explorerExclude.backup": {}
 }
