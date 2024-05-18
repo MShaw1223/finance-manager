@@ -5,7 +5,7 @@ import Signup from "../components/signup/signup";
 import { Button } from "@/components/ui/button";
 import { NavBar } from "@/components/navBar";
 
-export default function main() {
+export default function Main() {
   const [isNew, setNew] = useState<boolean>(false);
   return (
     <>

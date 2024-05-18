@@ -66,7 +66,7 @@ export default function Home({ params }: Params) {
     get_cards();
     get_user();
     get_overview_data();
-  }, []);
+  }, [params.id]);
   return (
     <>
       <NavBar user={user} />
