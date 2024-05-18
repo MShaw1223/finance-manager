@@ -8,13 +8,12 @@ export default function Login() {
   const handler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.target as HTMLFormElement);
-    const payload = {
-      username: data.get("username") as string,
-      user_password: data.get("password") as string,
-    };
     const res = await fetch("/api/login", {
       method: "POST",
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        username: data.get("username") as string,
+        user_password: data.get("password") as string,
+      }),
       headers: {
         "Content-Type": "application/json",
       },

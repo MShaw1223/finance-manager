@@ -1,10 +1,15 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Params } from "@/utils/types";
+import { CardDataParam, statsType } from "@/utils/types";
 import Tools from "./tools_components/tools";
 import Actions from "./actions/actions";
 import Overview from "./overview/overview";
 
-export default function TabBar({ params }: Params) {
+interface tabBarProps {
+  params: CardDataParam;
+  stats: statsType;
+}
+
+export default function TabBar({ params, stats }: tabBarProps) {
   return (
     <>
       <Tabs defaultValue="overview" className="w-full p-1">
@@ -14,7 +19,7 @@ export default function TabBar({ params }: Params) {
           <TabsTrigger value="tools">Tools</TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
-          <Overview params={params} />
+          <Overview stats={stats} />
         </TabsContent>
         <TabsContent value="actions">
           <Actions params={params} />

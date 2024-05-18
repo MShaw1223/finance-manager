@@ -1,10 +1,13 @@
-"use client";
-import { Params } from "@/utils/types";
+import { CardDataParam, Params } from "@/utils/types";
 import { FileRead } from "./fileRead";
 import { NewCardForm } from "./newCard";
 import { Separator } from "../ui/separator";
 
-export default function Tools({ params }: Params) {
+interface toolsProps {
+  params: CardDataParam;
+}
+
+export default function Tools({ params }: toolsProps) {
   return (
     <>
       <title>Tools</title>
@@ -12,7 +15,7 @@ export default function Tools({ params }: Params) {
         <div className="border rounded-lg p-2 m-1 flex-grow">
           <h1 className="text-center">Add Card</h1>
           <Separator className="mx-auto my-2" />
-          <NewCardForm params={params} />
+          <NewCardForm params={params.params} />
           {/* post */}
         </div>
         <div className="border rounded-lg p-2 m-1 flex-grow">
