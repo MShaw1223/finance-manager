@@ -25,6 +25,7 @@ export default function SignUpForm({ FormHandler }: SignUpFormProps) {
                 type="button"
                 variant="outline"
                 onClick={() => setShowPassword(!showPassword)}
+                className="min-w-[70px]"
               >
                 {showPassword ? "Hide" : "Show"}
               </Button>

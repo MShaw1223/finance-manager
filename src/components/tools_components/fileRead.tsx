@@ -23,14 +23,19 @@ export const FileRead = () => {
     <>
       <div className="flex flex-col space-y-3">
         <form>
-          <Input
-            type="file"
-            id="csvFileInput"
-            accept=".csv"
-            onChange={searchForCSV}
-          />
+          <label className="block">
+            <Input
+              type="file"
+              id="csvFileInput"
+              accept=".csv"
+              onChange={searchForCSV}
+              className="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:font-semibold hover:file:bg-accent/35 file:bg-accent border-0 h-11"
+            />
+          </label>
         </form>
-        <Textarea id="output" placeholder="Click on choose file" />
+        <div className="p-1">
+          <Textarea id="output" placeholder="Click on choose file" />
+        </div>
       </div>
     </>
   );

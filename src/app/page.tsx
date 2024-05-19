@@ -16,14 +16,18 @@ export default function Main() {
             <Button
               variant="ghost"
               onClick={() => setNew(false)}
-              className={!isNew ? "underline underline-offset-[13px]" : ""}
+              className={`transition delay-150 duration-150 ease-in-out ${
+                !isNew ? "underline underline-offset-[13px]" : ""
+              }`}
             >
               Log In
             </Button>
             <Button
               variant="ghost"
               onClick={() => setNew(true)}
-              className={isNew ? "underline underline-offset-[13px]" : ""}
+              className={`transition delay-150 duration-150 ease-in-out ${
+                isNew ? "underline underline-offset-[13px]" : ""
+              }`}
             >
               Sign Up
             </Button>
