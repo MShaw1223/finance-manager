@@ -19,7 +19,7 @@ export default function Home({ params }: Params) {
     stats: {
       most_used_card: { card_name: "" },
       most_visited: { spend_count: "", spend_location: "" },
-      running_spend: { running_spend: "" },
+      running_spend: { total_out_transactions: "", total_spend: "" },
     },
   });
   useEffect(() => {
