@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
 import SelectPeriod from "./selectPeriod";
-import { getter } from "@/utils/getData";
+import { Getter as g } from "@/utils/getData";
 
 export const BudgetSetter = ({ params }: CardDataParam) => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
@@ -15,7 +15,7 @@ export const BudgetSetter = ({ params }: CardDataParam) => {
   async function handler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (budgetAmount !== "" && period !== "" && selectedCardId !== null) {
-      const addBudget = new getter(
+      const addBudget = new g(
         "/api/addBudget",
         "POST",
         JSON.stringify({
@@ -39,6 +39,7 @@ export const BudgetSetter = ({ params }: CardDataParam) => {
         setBudgetAmount("");
         setSelectedCardId(null);
         setSelectedCardName("");
+        setPeriod("");
       }
     } else {
       toast({ description: "Ensure all fields have been entered" });

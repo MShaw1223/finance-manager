@@ -4,7 +4,7 @@ import CardSelector from "../selectCard";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
-import { getter } from "@/utils/getData";
+import { Getter as g } from "@/utils/getData";
 
 export const Spend = ({ params }: CardDataParam) => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
@@ -14,7 +14,7 @@ export const Spend = ({ params }: CardDataParam) => {
   async function handler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (location !== "" && spendAmount !== "" && selectedCardId !== null) {
-      const addSpend = new getter(
+      const addSpend = new g(
         "/api/addSpend",
         "POST",
         JSON.stringify({

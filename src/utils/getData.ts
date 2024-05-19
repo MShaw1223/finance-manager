@@ -1,6 +1,6 @@
-import { CardData } from "./types";
+// added generic type arg in case needed down the line
 
-export class getter {
+export class Getter<T> {
   private url: string;
   private method: string;
   private body: string;
@@ -10,7 +10,8 @@ export class getter {
     this.method = method;
     this.body = body;
   }
-  async fetch_post() {
+  // type of promise as asynchronous and then provide the return type in chevrons
+  async fetch_post(): Promise<{ status: number; json: T }> {
     const val = await fetch(this.url, {
       method: this.method,
       body: this.body,
