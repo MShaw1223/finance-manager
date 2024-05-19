@@ -19,11 +19,15 @@ export const NavBar = ({ user }: NavbarParams) => {
           </h1>
           <div className="flex flex-row">
             {user ? (
-              <div className="p-3">
-                <Button variant="outline" onClick={() => logout()}>
-                  <MdArrowBack />
-                </Button>
-              </div>
+              user[0] ? (
+                <div className="p-3">
+                  <Button variant="outline" onClick={() => logout()}>
+                    <MdArrowBack />
+                  </Button>
+                </div>
+              ) : (
+                <></>
+              )
             ) : (
               <></>
             )}
