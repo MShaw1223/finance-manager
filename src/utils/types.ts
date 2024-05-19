@@ -26,7 +26,7 @@ export type NavbarParams = {
 
 export type statsType = {
   stats: {
-    running_spend: { running_spend: string };
+    running_spend: { total_out_transactions: string; total_spend: string };
     most_visited: { spend_count: string; spend_location: string };
     most_used_card: { card_name: string };
   };

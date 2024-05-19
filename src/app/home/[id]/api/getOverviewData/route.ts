@@ -9,8 +9,15 @@ export async function GET(req: NextRequest, { params }: Params) {
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,
     });
-    const running_spend = sqlstring.format(
-      "select sum(amount) as running_spend from spend where cid in (select cid from card where uid = ?)",
+    const total_spend = sqlstring.format(
+      `
+      WITH card_cid AS (
+        SELECT cid FROM card WHERE uid = ?
+      )
+      SELECT
+        (SELECT SUM(amount) FROM spend WHERE cid IN (SELECT cid FROM card_cid)) AS total_spend,
+        (SELECT SUM(amount) FROM transactions WHERE transaction_from = 'me' AND cid IN (SELECT cid FROM card_cid)) AS total_out_transactions;
+      `,
       [id]
     );
     const most_used_card = sqlstring.format(
@@ -37,14 +44,21 @@ export async function GET(req: NextRequest, { params }: Params) {
       `,
       [id]
     );
-    const rs_done = await pool.query(running_spend);
-    const mu_done = await pool.query(most_used_card);
-    const mv_done = await pool.query(most_visited);
+    const [ts_done, mu_done, mv_done] = await Promise.all([
+      pool.query(total_spend),
+      pool.query(most_used_card),
+      pool.query(most_visited),
+    ]);
+    // const ts_done = await pool.query(total_spend);
+    // const ot_done = await pool.query(out_transactions);
+    // const mu_done = await pool.query(most_used_card);
+    // const mv_done = await pool.query(most_visited);
+
     await pool.end();
     return NextResponse.json(
       {
         stats: {
-          running_spend: rs_done.rows[0],
+          running_spend: ts_done.rows[0],
           most_used_card: mu_done.rows[0],
           most_visited: mv_done.rows[0],
         },

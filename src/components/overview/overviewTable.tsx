@@ -14,7 +14,9 @@ export const OverviewTable = ({ stats }: statsType) => {
         <tbody>
           <tr>
             <td className="border-t p-2">
-              {stats.running_spend.running_spend}
+              £{" "}
+              {parseFloat(stats.running_spend.total_out_transactions) +
+                parseFloat(stats.running_spend.total_spend)}
             </td>
             <td className="border-t border-x p-2">
               {stats.most_used_card.card_name}
