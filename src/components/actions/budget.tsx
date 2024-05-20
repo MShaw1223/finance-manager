@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
 import SelectPeriod from "./selectPeriod";
-import { Getter as g } from "@/utils/getData";
+import { Post as p } from "@/utils/getData";
 
 export const BudgetSetter = ({ params }: CardDataParam) => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
@@ -15,9 +15,8 @@ export const BudgetSetter = ({ params }: CardDataParam) => {
   async function handler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (budgetAmount !== "" && period !== "" && selectedCardId !== null) {
-      const addBudget = new g(
+      const addBudget = new p(
         "/api/addBudget",
-        "POST",
         JSON.stringify({
           time_period: period,
           amount: parseInt(budgetAmount),

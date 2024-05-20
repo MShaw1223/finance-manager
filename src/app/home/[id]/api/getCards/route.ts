@@ -15,8 +15,8 @@ export async function GET(req: NextRequest, params: Params) {
       [id]
     );
     const done = await pool.query(cardDetails);
-    const cardArray = done.rows.map((row) => row);
-    return NextResponse.json({ cardArray }, { status: 200 });
+    const array = done.rows;
+    return NextResponse.json({ array }, { status: 200 });
   } catch (e) {
     return NextResponse.json(`Error in POST for card retrieval: ${e}`, {
       status: 500,

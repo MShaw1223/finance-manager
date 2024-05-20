@@ -1,10 +1,10 @@
-import { CardData, CardDataParam, Params } from "@/utils/types";
-import { FormEvent, useEffect, useState } from "react";
+import { CardData, CardDataParam } from "@/utils/types";
+import { FormEvent, useState } from "react";
 import CardSelector from "../selectCard";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
-import { Getter as g } from "@/utils/getData";
+import { Post as p } from "@/utils/getData";
 
 export const Spend = ({ params }: CardDataParam) => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
@@ -14,9 +14,8 @@ export const Spend = ({ params }: CardDataParam) => {
   async function handler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (location !== "" && spendAmount !== "" && selectedCardId !== null) {
-      const addSpend = new g(
+      const addSpend = new p(
         "/api/addSpend",
-        "POST",
         JSON.stringify({
           location: location,
           amount: parseFloat(spendAmount),

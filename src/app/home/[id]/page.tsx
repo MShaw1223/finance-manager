@@ -1,21 +1,16 @@
 "use client";
 import { NavBar } from "@/components/navBar";
 import TabBar from "@/components/tabBar";
-import {
-  CardData,
-  CardDataParam,
-  Params,
-  statsType,
-  usersData,
-} from "@/utils/types";
+import { Get as g } from "@/utils/getData";
+import * as t from "@/utils/types";
 import { useEffect, useState } from "react";
 
-export default function Home({ params }: Params) {
-  const [data, setData] = useState<CardDataParam>({
+export default function Home({ params }: t.Params) {
+  const [data, setData] = useState<t.CardDataParam>({
     params: { data: [], id: params.id },
   });
-  const [user, setUser] = useState<usersData[]>([]);
-  const [stats, setStats] = useState<statsType>({
+  const [user, setUser] = useState<t.usersData[]>([]);
+  const [stats, setStats] = useState<t.statsType>({
     stats: {
       most_used_card: { card_name: "" },
       most_visited: { spend_count: "", spend_location: "" },
@@ -24,42 +19,29 @@ export default function Home({ params }: Params) {
   });
   useEffect(() => {
     async function get_cards() {
-      const datResponse = await fetch(`/home/${params.id}/api/getCards`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const res = await datResponse.json();
-      const set: CardData[] = res.cardArray;
+      const cardData = new g<t.CardData[]>(`/home/${params.id}/api/getCards`);
+      const cardDataResponse = await cardData.get_array();
+      const cards = cardDataResponse.array;
       const payload = {
         params: {
-          data: set,
+          data: cards,
           id: params.id,
         },
       };
       setData(payload);
     }
     async function get_user() {
-      const data = await fetch(`/home/${params.id}/api/getUser`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const res = await data.json();
-      const set: usersData[] = res.returnArray;
+      const userData = new g<t.usersData[]>(`/home/${params.id}/api/getUser`);
+      const userResponse = await userData.get_array();
+      const set = userResponse.array;
       setUser(set);
     }
     async function get_overview_data() {
-      const data = await fetch(`/home/${params.id}/api/getOverviewData`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const res = await data.json();
-      const set: statsType = res;
+      const overviewData = new g<t.statsType>(
+        `/home/${params.id}/api/getOverviewData`
+      );
+      const overviewResponse = await overviewData.get_other();
+      const set = overviewResponse.json;
       setStats(set);
     }
     // add any other gets here then pass as another set of params

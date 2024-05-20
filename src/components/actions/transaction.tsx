@@ -2,7 +2,7 @@ import { CardData, CardDataParam } from "@/utils/types";
 import { FormEvent, useState } from "react";
 import { toast } from "../ui/use-toast";
 import { FormTabBar } from "./formTabs";
-import { Getter as g } from "@/utils/getData";
+import { Post as p } from "@/utils/getData";
 
 export const Transactions = ({ params }: CardDataParam) => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
@@ -22,9 +22,8 @@ export const Transactions = ({ params }: CardDataParam) => {
       selectedCardId !== null &&
       selectedCardId !== undefined
     ) {
-      const adder = new g(
+      const adder = new p(
         "/api/transaction",
-        "POST",
         JSON.stringify({
           transactionAmount,
           recipient,

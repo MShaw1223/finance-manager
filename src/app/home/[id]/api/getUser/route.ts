@@ -17,8 +17,8 @@ export async function GET(req: NextRequest, { params }: Params) {
     const done = await pool.query(sqlStatement);
 
     await pool.end();
-    const returnArray = done.rows.map((row) => row);
-    return NextResponse.json({ returnArray }, { status: 200 });
+    const array = done.rows;
+    return NextResponse.json({ array }, { status: 200 });
   } catch (error) {
     return NextResponse.json(`Error in GET: ${error}`, { status: 500 });
   }
