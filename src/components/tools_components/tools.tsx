@@ -15,14 +15,18 @@ export default function Tools({ params }: toolsProps) {
         <div className="border rounded-lg p-2 m-1 flex-grow">
           <h1 className="text-center">Add Card</h1>
           <Separator className="mx-auto my-2" />
-          <NewCardForm params={params.params} />
-          {/* post */}
+          <div className="mx-8 my-14">
+            <NewCardForm params={params.params} />
+            {/* post */}
+          </div>
         </div>
         <div className="border rounded-lg p-2 m-1 flex-grow">
           <h1 className="text-center">Import CSV</h1>
           <Separator className="mx-auto my-2" />
-          <FileRead />
-          {/* no http request*/}
+          <div className="mx-6 my-8">
+            <FileRead />
+            {/* no http request*/}
+          </div>
         </div>
       </div>
     </>

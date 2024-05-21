@@ -65,13 +65,15 @@ export const BudgetSetter = ({ params }: CardDataParam) => {
                 />
                 <SelectPeriod handleChange={handleTimeChange} />
               </div>
-              <Input
-                name="amount"
-                placeholder="Amount"
-                value={budgetAmount}
-                onChange={(e) => setBudgetAmount(e.target.value)}
-              />
-              <Button type="submit">Add</Button>
+              <div className="flex flex-row space-x-1">
+                <Input
+                  name="amount"
+                  placeholder="Amount"
+                  value={budgetAmount}
+                  onChange={(e) => setBudgetAmount(e.target.value)}
+                />
+                <Button type="submit">Add</Button>
+              </div>
             </div>
           </div>
         </form>

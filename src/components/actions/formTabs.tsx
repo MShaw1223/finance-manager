@@ -33,7 +33,7 @@ export const FormTabBar = ({
 }: Props) => {
   return (
     <>
-      <Tabs defaultValue="in" className="w-full p-1">
+      <Tabs defaultValue="in" className="w-full p-1 text-center">
         <TabsList>
           <TabsTrigger value="in">In</TabsTrigger>
           <TabsTrigger value="out">Out</TabsTrigger>
@@ -72,6 +72,7 @@ export const FormTabBar = ({
           </form>
         </TabsContent>
         <TabsContent value="out">
+          {/* recipient = other */}
           <form onSubmit={form}>
             <div className="flex flex-wrap space-x-2">
               <div className="flex-grow space-y-2 text-center">
