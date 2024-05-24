@@ -1,3 +1,4 @@
+import { SelectProps } from "@/utils/interface";
 import {
   Select,
   SelectContent,
@@ -12,11 +13,7 @@ enum Times {
   Month = "monthly",
 }
 
-interface TimeSelectProps {
-  handleChange: (value: string) => void;
-}
-
-export default function SelectPeriod({ handleChange }: TimeSelectProps) {
+export default function SelectPeriod({ handleChange }: SelectProps) {
   const handleValChange = (value: string) => {
     handleChange(value);
   };

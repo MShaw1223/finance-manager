@@ -1,5 +1,5 @@
 import { extractBody } from "@/utils/extractBody";
-import { Params } from "@/utils/types";
+import { Params } from "@/utils/interface";
 import { Pool } from "@neondatabase/serverless";
 import { NextRequest, NextResponse } from "next/server";
 import sqlstring from "sqlstring";

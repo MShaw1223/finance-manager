@@ -1,13 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CardDataParam, statsType } from "@/utils/types";
 import Tools from "./tools_components/tools";
 import Actions from "./actions/actions";
 import Overview from "./overview/overview";
-
-interface tabBarProps {
-  params: CardDataParam;
-  stats: statsType;
-}
+import { tabBarProps } from "@/utils/interface";
 
 export default function TabBar({ params, stats }: tabBarProps) {
   return (

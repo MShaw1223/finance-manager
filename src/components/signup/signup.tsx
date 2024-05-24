@@ -2,6 +2,7 @@
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import SignUpForm from "./signupForm";
+import { Post as p } from "@/utils/helpful";
 
 export default function SignUp() {
   const router = useRouter();
@@ -18,16 +19,13 @@ export default function SignUp() {
       payload.user_password !== "" ||
       payload.username !== ""
     ) {
-      const res = await fetch("/api/signup", {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const response = await res.json();
-      const user_id = response.uid;
-      if (res.ok) {
+      const signup = new p<{ uid: number }>(
+        "/api/signup",
+        JSON.stringify(payload)
+      );
+      const response = await signup.fetch_post();
+      const user_id = response.json.uid;
+      if (response.status === 200) {
         router.push(`/home/${user_id}`);
       }
     }

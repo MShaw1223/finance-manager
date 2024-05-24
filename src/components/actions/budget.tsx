@@ -1,13 +1,14 @@
-import { CardData, CardDataParam } from "@/utils/types";
+import { CardData } from "@/utils/types";
 import { FormEvent, useState } from "react";
 import CardSelector from "../selectCard";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
 import SelectPeriod from "./selectPeriod";
-import { Post as p } from "@/utils/getData";
+import { Post as p } from "@/utils/helpful";
+import { CardDataParam } from "@/utils/interface";
 
-export const BudgetSetter = ({ params }: CardDataParam) => {
+const Budget = ({ params }: CardDataParam) => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
   const [selectedCardName, setSelectedCardName] = useState<string>("");
   const [budgetAmount, setBudgetAmount] = useState<string>("");
@@ -81,3 +82,4 @@ export const BudgetSetter = ({ params }: CardDataParam) => {
     </>
   );
 };
+export default Budget;

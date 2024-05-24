@@ -1,13 +1,10 @@
 "use client";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { FormProps } from "@/utils/interface";
 
-interface SignUpFormProps {
-  FormHandler: (e: FormEvent<HTMLFormElement>) => void;
-}
-
-export default function SignUpForm({ FormHandler }: SignUpFormProps) {
+export default function SignUpForm({ FormHandler }: FormProps) {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <>

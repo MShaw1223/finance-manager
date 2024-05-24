@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Pool } from "@neondatabase/serverless";
 import sqlstring from "sqlstring";
-import { Params } from "@/utils/types";
+import { Params } from "@/utils/interface";
 
 export async function GET(req: NextRequest, { params }: Params) {
   try {

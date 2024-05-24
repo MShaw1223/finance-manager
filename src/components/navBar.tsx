@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { MdArrowBack } from "react-icons/md";
 import { ModeToggle } from "./ui/themeToggle";
 import { useRouter } from "next/navigation";
-import { NavbarParams } from "@/utils/types";
+import { NavbarParams } from "@/utils/interface";
 
 export const NavBar = ({ user }: NavbarParams) => {
   const router = useRouter();

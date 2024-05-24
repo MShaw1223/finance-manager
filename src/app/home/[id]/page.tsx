@@ -1,12 +1,13 @@
 "use client";
 import { NavBar } from "@/components/navBar";
 import TabBar from "@/components/tabBar";
-import { Get as g } from "@/utils/getData";
+import { Get as g } from "@/utils/helpful";
+import { Params } from "@/utils/interface";
 import * as t from "@/utils/types";
 import { useEffect, useState } from "react";
 
-export default function Home({ params }: t.Params) {
-  const [data, setData] = useState<t.CardDataParam>({
+export default function Home({ params }: Params) {
+  const [data, setData] = useState<t.CardDataParamType>({
     params: { data: [], id: params.id },
   });
   const [user, setUser] = useState<t.usersData[]>([]);

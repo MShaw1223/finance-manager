@@ -6,19 +6,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-
-interface TransactionOptionProps {
-  handleChange: (value: string) => void;
-}
+import { SelectProps } from "@/utils/interface";
 
 enum Options {
   In = "in",
   Out = "out",
 }
 
-export default function TransactionOption({
-  handleChange,
-}: TransactionOptionProps) {
+export default function TransactionOption({ handleChange }: SelectProps) {
   const handleCardChange = (value: string) => {
     const selectedOption = value;
     // Pass the selected data to the handleChange function

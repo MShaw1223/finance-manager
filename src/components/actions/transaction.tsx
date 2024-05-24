@@ -1,10 +1,11 @@
-import { CardData, CardDataParam } from "@/utils/types";
+import { CardData } from "@/utils/types";
 import { FormEvent, useState } from "react";
 import { toast } from "../ui/use-toast";
 import { FormTabBar } from "./formTabs";
-import { Post as p } from "@/utils/getData";
+import { Post as p } from "@/utils/helpful";
+import { CardDataParam } from "@/utils/interface";
 
-export const Transactions = ({ params }: CardDataParam) => {
+const Transaction = ({ params }: CardDataParam) => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
   const [selectedCardName, setSelectedCardName] = useState<string>("");
   const [transactionAmount, setTransactionAmount] = useState<string>("");
@@ -79,3 +80,4 @@ export const Transactions = ({ params }: CardDataParam) => {
     </>
   );
 };
+export default Transaction;

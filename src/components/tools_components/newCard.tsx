@@ -2,9 +2,10 @@ import { FormEvent, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
-import { Params } from "@/utils/types";
+import { Params } from "@/utils/interface";
+import { Post as p } from "@/utils/helpful";
 
-export const NewCardForm = ({ params }: Params) => {
+const NewCardForm = ({ params }: Params) => {
   const [cardName, setCardName] = useState<string>("");
   async function handler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -16,17 +17,12 @@ export const NewCardForm = ({ params }: Params) => {
       card_name,
       uid,
     };
-    const res = await fetch("/api/newCard", {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!res.ok) {
+    const newCard = new p("/api/newCard", JSON.stringify(payload));
+    const res = await newCard.fetch_post();
+    if (res.status !== 200) {
       alert("Unable to add card");
     }
-    if (res.ok) {
+    if (res.status === 200) {
       setCardName("");
       toast({
         title: `${cardName} Card Added Successfully`,
@@ -53,3 +49,4 @@ export const NewCardForm = ({ params }: Params) => {
     </>
   );
 };
+export default NewCardForm;

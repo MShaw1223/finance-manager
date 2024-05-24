@@ -1,23 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CardData } from "@/utils/types";
-import { FormEvent } from "react";
 import CardSelector from "../selectCard";
-
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-
-interface Props {
-  form: (e: FormEvent<HTMLFormElement>) => void;
-  CardChange: (x: string) => void;
-  data: CardData[];
-  amount: string;
-  setAmount: (val: string) => void;
-  recipient: string;
-  setRecipient: (val: string) => void;
-  setOption: (val: string) => void;
-  setFrom: (val: string) => void;
-  from: string;
-}
+import { TabsProps } from "@/utils/interface";
 
 export const FormTabBar = ({
   form,
@@ -30,7 +15,7 @@ export const FormTabBar = ({
   setOption,
   setFrom,
   from,
-}: Props) => {
+}: TabsProps) => {
   return (
     <>
       <Tabs defaultValue="in" className="w-full p-1 text-center">

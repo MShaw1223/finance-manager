@@ -6,11 +6,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { CardSelectorProps } from "@/utils/interface";
 
-interface CardSelectorProps {
-  cards: CardData[];
-  handleChange: (value: string) => void;
-}
 export default function CardSelector({
   cards,
   handleChange,
@@ -25,6 +22,7 @@ export default function CardSelector({
       handleChange(JSON.stringify(selectedCard));
     }
   };
+  console.log(cards);
   return (
     <>
       {cards.length === 0 ? (

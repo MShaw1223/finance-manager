@@ -1,6 +1,36 @@
+import Budget from "@/components/actions/budget";
+import Spend from "@/components/actions/spend";
+import Transaction from "@/components/actions/transaction";
+import FileRead from "@/components/tools_components/fileRead";
+import NewCardForm from "@/components/tools_components/newCard";
+import NewRecipient from "@/components/tools_components/newRecipient";
+
+const ActionsData = {
+  head: ["Record"],
+  subHead: [["Transaction", "Budget", "Spend"]],
+};
+
+const ToolsData = {
+  head: ["Tools Misc"],
+  subHead: [["NewCardForm", "NewRecipient", "FileRead"]],
+};
+
+// typed as an object which has keys that are strings and the values associated with those keys can be any
+const ActionsComponents: { [key: string]: any } = {
+  Transaction,
+  Spend,
+  Budget,
+};
+
+const ToolsComponents: { [key: string]: any } = {
+  FileRead,
+  NewCardForm,
+  NewRecipient,
+};
+
 // added generic type arg in case needed down the line
 
-export class Post<T> {
+class Post<T> {
   private url: string;
   private body: string;
 
@@ -16,10 +46,11 @@ export class Post<T> {
       headers: { "Content-Type": "application/json" },
     });
     const res = await val.json();
-    return { status: res.status, json: res };
+    return { status: val.status, json: res };
   }
 }
-export class Get<T> {
+
+class Get<T> {
   private url: string;
 
   constructor(url: string) {
@@ -32,7 +63,7 @@ export class Get<T> {
       headers: { "Content-Type": "application/json" },
     });
     const res = await val.json();
-    return { status: res.status, json: res };
+    return { status: val.status, json: res };
   }
   async get_array(): Promise<{ status: number; json: string; array: T }> {
     const val = await fetch(this.url, {
@@ -41,6 +72,15 @@ export class Get<T> {
     });
     const res = await val.json();
     const returned = res.array;
-    return { status: res.status, array: returned, json: res };
+    return { status: val.status, array: returned, json: res };
   }
 }
+
+export {
+  ActionsData,
+  ToolsData,
+  ActionsComponents,
+  ToolsComponents,
+  Post,
+  Get,
+};
