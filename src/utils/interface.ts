@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { CardData, statsType, usersData } from "./types";
+import { CardData, recipientType, statsType, usersData } from "./types";
 
 interface Params {
   params: { id: number };
@@ -14,15 +14,21 @@ interface CardDataParam {
     data: CardData[];
     id: number;
   };
+  recipients: recipientType[];
 }
 
 interface PageProps {
   params: CardDataParam;
 }
+interface ToolsActionsPageProps {
+  params: CardDataParam;
+  recipients: recipientType[];
+}
 
 interface tabBarProps {
   params: CardDataParam;
   stats: statsType;
+  recipients: recipientType[];
 }
 
 interface CardSelectorProps {
@@ -36,11 +42,10 @@ interface TabsProps {
   data: CardData[];
   amount: string;
   setAmount: (val: string) => void;
-  recipient: string;
-  setRecipient: (val: string) => void;
+  command: (val: string) => void;
   setOption: (val: string) => void;
-  setFrom: (val: string) => void;
-  from: string;
+  option: string;
+  recipients: recipientType[];
 }
 
 interface FormProps {
@@ -57,6 +62,15 @@ interface TileProps {
     subHead: string[][];
   };
   params: any;
+  recipients: recipientType[];
+}
+interface ActionsTileProps {
+  md: {
+    head: string[];
+    subHead: string[][];
+  };
+  params: any;
+  recipients: recipientType[];
 }
 
 export {
@@ -64,10 +78,12 @@ export {
   type NavbarParams,
   type CardDataParam,
   type PageProps,
+  type ToolsActionsPageProps,
   type tabBarProps,
   type CardSelectorProps,
   type TabsProps,
   type FormProps,
   type SelectProps,
   type TileProps,
+  type ActionsTileProps,
 };

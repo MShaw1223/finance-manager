@@ -3,6 +3,7 @@ import CardSelector from "../selectCard";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { TabsProps } from "@/utils/interface";
+import AutoInput from "../autocompInput";
 
 export const FormTabBar = ({
   form,
@@ -10,25 +11,40 @@ export const FormTabBar = ({
   data,
   amount,
   setAmount,
-  recipient,
-  setRecipient,
   setOption,
-  setFrom,
-  from,
+  recipients,
+  command,
+  option,
 }: TabsProps) => {
   return (
     <>
-      <Tabs defaultValue="in" className="w-full p-1 text-center">
+      <Tabs defaultValue="in" className="text-center">
         <TabsList>
-          <TabsTrigger value="in">In</TabsTrigger>
-          <TabsTrigger value="out">Out</TabsTrigger>
+          <TabsTrigger
+            value="in"
+            onClick={(e) => {
+              e.preventDefault();
+              setOption("in");
+            }}
+          >
+            In
+          </TabsTrigger>
+          <TabsTrigger
+            value="out"
+            onClick={(e) => {
+              e.preventDefault();
+              setOption("out");
+            }}
+          >
+            Out
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="in">
           {/* recipient = me */}
           <form onSubmit={form}>
             <div className="flex flex-wrap space-x-2">
               <div className="flex-grow space-y-2 text-center">
-                <div className="flex flex-row space-x-1">
+                <div className="flex flex-row space-x-2">
                   <CardSelector cards={data} handleChange={CardChange} />
                   <Input
                     name="amount"
@@ -36,19 +52,15 @@ export const FormTabBar = ({
                     value={amount}
                     onChange={(e) => {
                       setAmount(e.target.value);
-                      setOption("in");
                     }}
                   />
                 </div>
-                <div className="flex flex-row space-x-1">
-                  <Input
-                    name="from"
-                    placeholder="From"
-                    value={from}
-                    onChange={(e) => {
-                      setFrom(e.target.value);
-                      setRecipient("me");
-                    }}
+                <div className="flex flex-row space-x-2">
+                  {/* TODO: add command here */}
+                  <AutoInput
+                    recipients={recipients}
+                    handler={command}
+                    option={option}
                   />
                   <Button type="submit">Add</Button>
                 </div>
@@ -61,7 +73,7 @@ export const FormTabBar = ({
           <form onSubmit={form}>
             <div className="flex flex-wrap space-x-2">
               <div className="flex-grow space-y-2 text-center">
-                <div className="flex flex-row space-x-1">
+                <div className="flex flex-row space-x-2">
                   <CardSelector cards={data} handleChange={CardChange} />
                   <Input
                     name="amount"
@@ -69,19 +81,15 @@ export const FormTabBar = ({
                     value={amount}
                     onChange={(e) => {
                       setAmount(e.target.value);
-                      setOption("out");
                     }}
                   />
                 </div>
-                <div className="flex flex-row space-x-1">
-                  <Input
-                    name="recipient"
-                    placeholder="Recipient"
-                    value={recipient}
-                    onChange={(e) => {
-                      setFrom("me");
-                      setRecipient(e.target.value);
-                    }}
+                <div className="flex flex-row space-x-2">
+                  {/* TODO: add command here */}
+                  <AutoInput
+                    recipients={recipients}
+                    handler={command}
+                    option={option}
                   />
                   <Button type="submit">Add</Button>
                 </div>

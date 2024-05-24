@@ -18,6 +18,7 @@ export default function Home({ params }: Params) {
       running_spend: { total_out_transactions: "", total_spend: "" },
     },
   });
+  const [recipient, setRecipients] = useState<t.recipientType[]>([]);
   useEffect(() => {
     async function get_cards() {
       const cardData = new g<t.CardData[]>(`/home/${params.id}/api/getCards`);
@@ -45,16 +46,25 @@ export default function Home({ params }: Params) {
       const set = overviewResponse.json;
       setStats(set);
     }
+    async function get_recipients() {
+      const getRecipients = new g<t.recipientType[]>(
+        `/home/${params.id}/api/getRecipients`
+      );
+      const response = await getRecipients.get_array();
+      const set = response.array;
+      setRecipients(set);
+    }
     // add any other gets here then pass as another set of params
     get_cards();
     get_user();
     get_overview_data();
+    get_recipients();
   }, [params.id]);
   return (
     <>
       <NavBar user={user} />
       <div className="flex">
-        <TabBar params={data} stats={stats} />
+        <TabBar params={data} stats={stats} recipients={recipient} />
       </div>
     </>
   );

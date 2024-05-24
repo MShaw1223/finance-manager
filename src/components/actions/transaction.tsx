@@ -5,31 +5,21 @@ import { FormTabBar } from "./formTabs";
 import { Post as p } from "@/utils/helpful";
 import { CardDataParam } from "@/utils/interface";
 
-const Transaction = ({ params }: CardDataParam) => {
+const Transaction = ({ params, recipients }: CardDataParam) => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
   const [selectedCardName, setSelectedCardName] = useState<string>("");
   const [transactionAmount, setTransactionAmount] = useState<string>("");
-  const [TOption, setOption] = useState<string>("");
-  const [recipient, setRecipient] = useState<string>("");
-  const [from, setFrom] = useState<string>("");
-
+  const [TOption, setOption] = useState<string>("in");
+  const [value, setValue] = useState({ from: "", recipient: "" });
   async function formHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (
-      from !== "" &&
-      transactionAmount !== "" &&
-      recipient !== "" &&
-      TOption !== "" &&
-      selectedCardId !== null &&
-      selectedCardId !== undefined
-    ) {
+    if (transactionAmount !== "" && TOption !== "" && selectedCardId !== null) {
       const adder = new p(
         "/api/transaction",
         JSON.stringify({
           transactionAmount,
-          recipient,
           selectedCardId,
-          from,
+          value,
         })
       );
       const addBudget = await adder.fetch_post();
@@ -37,6 +27,7 @@ const Transaction = ({ params }: CardDataParam) => {
         toast({
           title: "Oops... There's a problem",
           description: "Unable to record transaction due to a server error",
+          variant: "destructive",
         });
       }
       if (addBudget.status === 200) {
@@ -44,23 +35,31 @@ const Transaction = ({ params }: CardDataParam) => {
           title: "Transaction recorded successfully!",
           description: `Your transaction of £${transactionAmount} on your ${selectedCardName} card ${
             TOption === "in" ? "from" : "to"
-          } ${TOption === "in" ? from : recipient} has been recorded`,
+          } ${
+            TOption === "in" ? value.from : value.recipient
+          } has been recorded`,
         });
         setTransactionAmount("");
         setSelectedCardId(null);
         setSelectedCardName("");
         setOption("");
-        setFrom("");
-        setRecipient("");
       }
     } else {
-      toast({ description: "Ensure all fields are entered" });
+      toast({
+        description: "Ensure all fields are entered",
+        variant: "destructive",
+      });
     }
   }
   const handleCardChange = (cardString: string) => {
     const selectedCard = JSON.parse(cardString) as CardData;
     setSelectedCardId(selectedCard.cid);
     setSelectedCardName(selectedCard.card_name);
+  };
+  const handleChange = (str: string) => {
+    TOption === "in"
+      ? setValue({ from: str, recipient: "" })
+      : setValue({ from: "", recipient: str });
   };
 
   return (
@@ -71,11 +70,10 @@ const Transaction = ({ params }: CardDataParam) => {
         data={params.data}
         amount={transactionAmount}
         setAmount={setTransactionAmount}
-        setRecipient={setRecipient}
-        recipient={recipient}
+        command={handleChange}
         setOption={setOption}
-        setFrom={setFrom}
-        from={from}
+        option={TOption}
+        recipients={recipients}
       />
     </>
   );

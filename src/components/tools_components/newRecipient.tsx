@@ -17,17 +17,17 @@ const NewRecipient = ({ params }: Params) => {
       recipient_name,
       uid,
     };
-    const NewRecipient = new p("/api/newRecipient", JSON.stringify(payload));
+    const NewRecipient = new p("/api/recipient", JSON.stringify(payload));
     const response = await NewRecipient.fetch_post();
     if (response.status !== 200) {
-      alert("Unable to add recipient");
+      toast({ title: "Unable to add recipient." });
     }
     if (response.status === 200) {
       setRecipient("");
       toast({
-        title: `${recipient} Has been Added Successfully`,
+        title: `${recipient} Has been Added Successfully.`,
         description:
-          "You can now record transactions to and from this recipient",
+          "You can now record transactions to and from this recipient.",
       });
     }
   }
@@ -36,13 +36,17 @@ const NewRecipient = ({ params }: Params) => {
       <form onSubmit={handler}>
         <div className="flex flex-wrap">
           <div className="flex-grow text-center space-y-4">
+            {/* 
+            change to a select component, 
+            taking all recipients in the recipient table that are not recipients already
+            */}
             <Input
               name="recipient"
               value={recipient}
               onChange={(e) => setRecipient(e.target.value)}
               placeholder="New Recipient"
             />
-            <Button type="submit">Add Recipient</Button>
+            <Button type="submit">Add recipient</Button>
           </div>
         </div>
       </form>

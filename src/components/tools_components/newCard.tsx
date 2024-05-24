@@ -20,7 +20,7 @@ const NewCardForm = ({ params }: Params) => {
     const newCard = new p("/api/newCard", JSON.stringify(payload));
     const res = await newCard.fetch_post();
     if (res.status !== 200) {
-      alert("Unable to add card");
+      toast({ title: "Unable to add card.", variant: "destructive" });
     }
     if (res.status === 200) {
       setCardName("");

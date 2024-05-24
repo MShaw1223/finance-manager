@@ -1,4 +1,3 @@
-import { CardData } from "@/utils/types";
 import {
   Select,
   SelectContent,
@@ -22,7 +21,6 @@ export default function CardSelector({
       handleChange(JSON.stringify(selectedCard));
     }
   };
-  console.log(cards);
   return (
     <>
       {cards.length === 0 ? (

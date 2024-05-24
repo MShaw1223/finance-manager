@@ -24,9 +24,16 @@ type statsType = {
   };
 };
 
+type recipientType = {
+  rid: number;
+  recipient_name: string;
+  favourite: boolean;
+};
+
 export {
   type usersData,
   type CardData,
   type CardDataParamType,
   type statsType,
+  type recipientType,
 };

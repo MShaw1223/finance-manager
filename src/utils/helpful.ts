@@ -3,6 +3,7 @@ import Spend from "@/components/actions/spend";
 import Transaction from "@/components/actions/transaction";
 import FileRead from "@/components/tools_components/fileRead";
 import NewCardForm from "@/components/tools_components/newCard";
+import NewFavourite from "@/components/tools_components/newFavourite";
 import NewRecipient from "@/components/tools_components/newRecipient";
 
 const ActionsData = {
@@ -12,7 +13,7 @@ const ActionsData = {
 
 const ToolsData = {
   head: ["Tools Misc"],
-  subHead: [["NewCardForm", "NewRecipient", "FileRead"]],
+  subHead: [["NewCardForm", "NewRecipient", "NewFavourite", "FileRead"]],
 };
 
 // typed as an object which has keys that are strings and the values associated with those keys can be any
@@ -25,6 +26,7 @@ const ActionsComponents: { [key: string]: any } = {
 const ToolsComponents: { [key: string]: any } = {
   FileRead,
   NewCardForm,
+  NewFavourite,
   NewRecipient,
 };
 
@@ -76,6 +78,24 @@ class Get<T> {
   }
 }
 
+class Put {
+  private url: string;
+  private body: string;
+
+  constructor(url: string, body: string) {
+    this.url = url;
+    this.body = body;
+  }
+  async put(): Promise<{ status: number }> {
+    const val = await fetch(this.url, {
+      method: "PUT",
+      body: this.body,
+      headers: { "Content-Type": "application/json" },
+    });
+    return { status: val.status };
+  }
+}
+
 export {
   ActionsData,
   ToolsData,
@@ -83,4 +103,5 @@ export {
   ToolsComponents,
   Post,
   Get,
+  Put,
 };

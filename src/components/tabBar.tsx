@@ -4,7 +4,7 @@ import Actions from "./actions/actions";
 import Overview from "./overview/overview";
 import { tabBarProps } from "@/utils/interface";
 
-export default function TabBar({ params, stats }: tabBarProps) {
+export default function TabBar({ params, stats, recipients }: tabBarProps) {
   return (
     <>
       <Tabs defaultValue="overview" className="w-full p-1">
@@ -17,10 +17,10 @@ export default function TabBar({ params, stats }: tabBarProps) {
           <Overview stats={stats} />
         </TabsContent>
         <TabsContent value="actions">
-          <Actions params={params} />
+          <Actions params={params} recipients={recipients} />
         </TabsContent>
         <TabsContent value="tools">
-          <Tools params={params} />
+          <Tools params={params} recipients={recipients} />
         </TabsContent>
       </Tabs>
     </>
