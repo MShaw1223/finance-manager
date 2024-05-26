@@ -3,9 +3,9 @@ import { FormEvent, useState } from "react";
 import { toast } from "../ui/use-toast";
 import { FormTabBar } from "./formTabs";
 import { Post as p } from "@/utils/helpful";
-import { CardDataParam } from "@/utils/interface";
+import { TransactionParam } from "@/utils/interface";
 
-const Transaction = ({ params, recipients }: CardDataParam) => {
+const Transaction = ({ params, recipients }: TransactionParam) => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
   const [selectedCardName, setSelectedCardName] = useState<string>("");
   const [transactionAmount, setTransactionAmount] = useState<string>("");

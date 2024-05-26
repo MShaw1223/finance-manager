@@ -14,6 +14,13 @@ interface CardDataParam {
     data: CardData[];
     id: number;
   };
+}
+
+interface TransactionParam {
+  params: {
+    data: CardData[];
+    id: number;
+  };
   recipients: recipientType[];
 }
 
@@ -77,6 +84,7 @@ export {
   type Params,
   type NavbarParams,
   type CardDataParam,
+  type TransactionParam,
   type PageProps,
   type ToolsActionsPageProps,
   type tabBarProps,
