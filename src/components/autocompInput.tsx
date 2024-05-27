@@ -46,7 +46,7 @@ export default function AutoInput({
           </Button>
         </PopoverTrigger>
         <PopoverContent className="p-0">
-          <Command v-model="value">
+          <Command value={value} onValueChange={setValue}>
             <CommandInput
               placeholder={`Select ${
                 option === "in" ? "From" : "Recipient"
@@ -59,8 +59,8 @@ export default function AutoInput({
                   .filter((recipient) => recipient.favourite)
                   .map((recipient) => (
                     <CommandItem
-                      key={recipient.rid}
-                      value={String(recipient.rid)}
+                      key={recipient.recipient_name}
+                      value={recipient.recipient_name}
                       onSelect={() => {
                         handler(value);
                         setValue(recipient.recipient_name);
@@ -83,8 +83,8 @@ export default function AutoInput({
                   .filter((recipient) => !recipient.favourite)
                   .map((recipient) => (
                     <CommandItem
-                      key={recipient.rid}
-                      value={String(recipient.rid)}
+                      key={recipient.recipient_name}
+                      value={recipient.recipient_name}
                       onSelect={() => {
                         handler(value);
                         setValue(recipient.recipient_name);

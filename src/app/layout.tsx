@@ -8,6 +8,8 @@ export const metadata = {
 };
 
 const FT = Figtree({ subsets: ["latin"], display: "swap" });
+
+// TODO: Add react query to refresh the tiles on new information entry
 export default function RootLayout({
   children,
 }: Readonly<{
