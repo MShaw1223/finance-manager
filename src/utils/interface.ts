@@ -53,6 +53,7 @@ interface TabsProps {
   setOption: (val: string) => void;
   option: string;
   recipients: recipientType[];
+  isPending: boolean;
 }
 
 interface FormProps {

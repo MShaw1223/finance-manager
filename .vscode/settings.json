@@ -1,5 +1,11 @@
 {
-  "cSpell.words": ["Financials", "neondatabase", "Popover", "Signup"],
+  "cSpell.words": [
+    "Figtree",
+    "Financials",
+    "neondatabase",
+    "Popover",
+    "Signup"
+  ],
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,

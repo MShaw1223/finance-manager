@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/components/themeProvider";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Figtree } from "next/font/google";
+import Provider from "./providers";
 
 export const metadata = {
   title: "Finance Manager",
@@ -9,7 +10,6 @@ export const metadata = {
 
 const FT = Figtree({ subsets: ["latin"], display: "swap" });
 
-// TODO: Add react query to refresh the tiles on new information entry
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,7 +26,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <Provider>{children}</Provider>
             <Toaster />
           </ThemeProvider>
         </body>

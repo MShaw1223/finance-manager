@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { TabsProps } from "@/utils/interface";
 import AutoInput from "../autocompInput";
+import { PendingTransaction } from "../pendingForm";
 
 export const FormTabBar = ({
   form,
@@ -15,6 +16,7 @@ export const FormTabBar = ({
   recipients,
   command,
   option,
+  isPending,
 }: TabsProps) => {
   return (
     <>
@@ -41,61 +43,67 @@ export const FormTabBar = ({
         </TabsList>
         <TabsContent value="in">
           {/* recipient = me */}
-          <form onSubmit={form}>
-            <div className="flex flex-wrap space-x-2">
-              <div className="flex-grow space-y-2 text-center">
-                <div className="flex flex-row space-x-2">
-                  <CardSelector cards={data} handleChange={CardChange} />
-                  <Input
-                    name="amount"
-                    placeholder="Amount"
-                    value={amount}
-                    onChange={(e) => {
-                      setAmount(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="flex flex-row space-x-2">
-                  {/* TODO: add command here */}
-                  <AutoInput
-                    recipients={recipients}
-                    handler={command}
-                    option={option}
-                  />
-                  <Button type="submit">Add</Button>
+          {!isPending ? (
+            <form onSubmit={form}>
+              <div className="flex flex-wrap space-x-2">
+                <div className="flex-grow space-y-2 text-center">
+                  <div className="flex flex-row space-x-2">
+                    <CardSelector cards={data} handleChange={CardChange} />
+                    <Input
+                      name="amount"
+                      placeholder="Amount"
+                      value={amount}
+                      onChange={(e) => {
+                        setAmount(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-row space-x-2">
+                    <AutoInput
+                      recipients={recipients}
+                      handler={command}
+                      option={option}
+                    />
+                    <Button type="submit">Add</Button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          ) : (
+            <PendingTransaction />
+          )}
         </TabsContent>
         <TabsContent value="out">
           {/* recipient = other */}
-          <form onSubmit={form}>
-            <div className="flex flex-wrap space-x-2">
-              <div className="flex-grow space-y-2 text-center">
-                <div className="flex flex-row space-x-2">
-                  <CardSelector cards={data} handleChange={CardChange} />
-                  <Input
-                    name="amount"
-                    placeholder="Amount"
-                    value={amount}
-                    onChange={(e) => {
-                      setAmount(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="flex flex-row space-x-2">
-                  {/* TODO: add command here */}
-                  <AutoInput
-                    recipients={recipients}
-                    handler={command}
-                    option={option}
-                  />
-                  <Button type="submit">Add</Button>
+          {!isPending ? (
+            <form onSubmit={form}>
+              <div className="flex flex-wrap space-x-2">
+                <div className="flex-grow space-y-2 text-center">
+                  <div className="flex flex-row space-x-2">
+                    <CardSelector cards={data} handleChange={CardChange} />
+                    <Input
+                      name="amount"
+                      placeholder="Amount"
+                      value={amount}
+                      onChange={(e) => {
+                        setAmount(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-row space-x-2">
+                    <AutoInput
+                      recipients={recipients}
+                      handler={command}
+                      option={option}
+                    />
+                    <Button type="submit">Add</Button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          ) : (
+            <PendingTransaction />
+          )}
         </TabsContent>
       </Tabs>
     </>
