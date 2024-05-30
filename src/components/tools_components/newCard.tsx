@@ -7,7 +7,7 @@ import { Post as p } from "@/utils/helpful";
 import { useMutation } from "@tanstack/react-query";
 import { PendingNewCard } from "../pendingForm";
 
-const NewCardForm = ({ params }: Params) => {
+const NewCard = ({ params }: Params) => {
   const [cardName, setCardName] = useState<string>("");
   const { mutate, isPending } = useMutation({
     mutationFn: async (e: FormEvent<HTMLFormElement>) => {
@@ -62,4 +62,4 @@ const NewCardForm = ({ params }: Params) => {
     </>
   );
 };
-export default NewCardForm;
+export default NewCard;

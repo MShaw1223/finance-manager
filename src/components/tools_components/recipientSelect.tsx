@@ -21,7 +21,7 @@ export default function RecipientSelector({
     <>
       <Select onValueChange={handleCardChange}>
         <SelectTrigger>
-          <SelectValue placeholder="FooBar" />
+          <SelectValue placeholder="Recipient" />
         </SelectTrigger>
         <SelectContent>
           {recipients &&

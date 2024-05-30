@@ -2,7 +2,7 @@ import Budget from "@/components/actions/budget";
 import Spend from "@/components/actions/spend";
 import Transaction from "@/components/actions/transaction";
 import FileRead from "@/components/tools_components/fileRead";
-import NewCardForm from "@/components/tools_components/newCard";
+import NewCard from "@/components/tools_components/newCard";
 import NewFavourite from "@/components/tools_components/newFavourite";
 import NewRecipient from "@/components/tools_components/newRecipient";
 
@@ -13,7 +13,7 @@ const ActionsData = {
 
 const ToolsData = {
   head: ["Tools Misc"],
-  subHead: [["NewCardForm", "NewRecipient", "NewFavourite", "FileRead"]],
+  subHead: [["NewCard", "NewRecipient", "NewFavourite", "FileRead"]],
 };
 
 // typed as an object which has keys that are strings and the values associated with those keys can be any
@@ -25,7 +25,7 @@ const ActionsComponents: { [key: string]: any } = {
 
 const ToolsComponents: { [key: string]: any } = {
   FileRead,
-  NewCardForm,
+  NewCard,
   NewFavourite,
   NewRecipient,
 };
