@@ -15,9 +15,9 @@ export default function Login() {
     };
     const login = new p<{ uid: number }>("/api/login", JSON.stringify(payload));
     const response = await login.fetch_post();
-    const user_id = response.json.uid;
+    const { uid } = response.json;
     if (response.status === 200) {
-      router.push(`/home/${user_id}`);
+      router.push(`/home/${uid}`);
     } else {
       alert("Unable to log in");
     }

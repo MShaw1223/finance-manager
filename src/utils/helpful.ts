@@ -47,7 +47,7 @@ class Post<T> {
       body: this.body,
       headers: { "Content-Type": "application/json" },
     });
-    const res = await val.json();
+    const res: T = await val.json();
     return { status: val.status, json: res };
   }
 }
