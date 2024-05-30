@@ -25,9 +25,17 @@ export default function AutoInput({
 }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
-  const selectedRecipient = recipients.find(
-    (recipient) => recipient.recipient_name === value
+  const [selectedRecipient, setSelectedRecipient] = useState<string | null>(
+    null
   );
+
+  const handleSelection = (recipientName: string) => {
+    setValue(recipientName);
+    setSelectedRecipient(recipientName);
+    handler(value);
+    setOpen(false);
+  };
+
   return (
     <>
       <Popover open={open} onOpenChange={setOpen}>
@@ -40,7 +48,7 @@ export default function AutoInput({
             onClick={() => setOpen(!open)}
           >
             {selectedRecipient
-              ? selectedRecipient.recipient_name
+              ? selectedRecipient
               : `Select ${option === "in" ? "From" : "Recipient"}...`}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -61,15 +69,11 @@ export default function AutoInput({
                     <CommandItem
                       key={recipient.recipient_name}
                       value={recipient.recipient_name}
-                      onSelect={() => {
-                        handler(value);
-                        setValue(recipient.recipient_name);
-                        setOpen(false);
-                      }}
+                      onSelect={() => handleSelection(recipient.recipient_name)}
                     >
                       <Check
                         className={`mr-2 h-4 w-4 ${
-                          value === recipient.recipient_name
+                          selectedRecipient === recipient.recipient_name
                             ? "opacity-100"
                             : "opacity-0"
                         }`}
@@ -85,15 +89,11 @@ export default function AutoInput({
                     <CommandItem
                       key={recipient.recipient_name}
                       value={recipient.recipient_name}
-                      onSelect={() => {
-                        handler(value);
-                        setValue(recipient.recipient_name);
-                        setOpen(false);
-                      }}
+                      onSelect={() => handleSelection(recipient.recipient_name)}
                     >
                       <Check
                         className={`mr-2 h-4 w-4 ${
-                          value === recipient.recipient_name
+                          selectedRecipient === recipient.recipient_name
                             ? "opacity-100"
                             : "opacity-0"
                         }`}

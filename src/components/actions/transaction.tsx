@@ -64,9 +64,11 @@ const Transaction = ({ params, recipients }: TransactionParam) => {
     setSelectedCardName(selectedCard.card_name);
   };
   const handleChange = (str: string) => {
-    TOption === "in"
-      ? setValue({ from: str, recipient: "" })
-      : setValue({ from: "", recipient: str });
+    if (TOption === "in") {
+      setValue({ from: str, recipient: "" });
+    } else {
+      setValue({ from: "", recipient: str });
+    }
   };
 
   return (
