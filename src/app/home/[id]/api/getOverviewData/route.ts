@@ -49,11 +49,6 @@ export async function GET(req: NextRequest, { params }: Params) {
       pool.query(most_used_card),
       pool.query(most_visited),
     ]);
-    // const ts_done = await pool.query(total_spend);
-    // const ot_done = await pool.query(out_transactions);
-    // const mu_done = await pool.query(most_used_card);
-    // const mv_done = await pool.query(most_visited);
-
     await pool.end();
     return NextResponse.json(
       {
