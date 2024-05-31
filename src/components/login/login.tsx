@@ -3,6 +3,7 @@ import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import LoginForm from "./loginForm";
 import { Post as p } from "@/utils/helpful";
+import { toast } from "../ui/use-toast";
 
 export default function Login() {
   const router = useRouter();
@@ -19,7 +20,10 @@ export default function Login() {
     if (response.status === 200) {
       router.push(`/home/${uid}`);
     } else {
-      alert("Unable to log in");
+      toast({
+        title: "Unable to log in",
+        variant: "destructive",
+      });
     }
   };
   return (

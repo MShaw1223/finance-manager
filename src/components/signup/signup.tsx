@@ -3,6 +3,7 @@ import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import SignUpForm from "./signupForm";
 import { Post as p } from "@/utils/helpful";
+import { toast } from "../ui/use-toast";
 
 export default function SignUp() {
   const router = useRouter();
@@ -27,6 +28,16 @@ export default function SignUp() {
       const user_id = response.json.uid;
       if (response.status === 200) {
         router.push(`/home/${user_id}`);
+      } else if (response.status === 403) {
+        toast({
+          title: "User already exists",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Unable to log in",
+          variant: "destructive",
+        });
       }
     }
   };
