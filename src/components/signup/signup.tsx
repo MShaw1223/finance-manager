@@ -27,7 +27,7 @@ export default function SignUp() {
       const response = await signup.fetch_post();
       const user_id = response.json.uid;
       if (response.status === 200) {
-        router.push(`/home/${user_id}`);
+        router.push(`/home/${user_id}?tab=overview`);
       } else if (response.status === 403) {
         toast({
           title: "User already exists",
@@ -39,6 +39,11 @@ export default function SignUp() {
           variant: "destructive",
         });
       }
+    } else {
+      toast({
+        title: "Ensure all fields are entered",
+        variant: "destructive",
+      });
     }
   };
   return (

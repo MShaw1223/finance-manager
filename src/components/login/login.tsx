@@ -14,14 +14,24 @@ export default function Login() {
       username: data.get("username") as string,
       user_password: data.get("password") as string,
     };
-    const login = new p<{ uid: number }>("/api/login", JSON.stringify(payload));
-    const response = await login.fetch_post();
-    const { uid } = response.json;
-    if (response.status === 200) {
-      router.push(`/home/${uid}`);
+    if (payload.user_password !== "" || payload.username !== "") {
+      const login = new p<{ uid: number }>(
+        "/api/login",
+        JSON.stringify(payload)
+      );
+      const response = await login.fetch_post();
+      const { uid } = response.json;
+      if (response.status === 200) {
+        router.push(`/home/${uid}?tab=overview`);
+      } else {
+        toast({
+          title: "Unable to log in",
+          variant: "destructive",
+        });
+      }
     } else {
       toast({
-        title: "Unable to log in",
+        title: "Ensure all fields are entered",
         variant: "destructive",
       });
     }
