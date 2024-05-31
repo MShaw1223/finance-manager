@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
 import { Params } from "@/utils/interface";
-import { Post as p } from "@/utils/helpful";
+import { Post as p, sleep } from "@/utils/helpful";
 import { useMutation } from "@tanstack/react-query";
 import { PendingNewCard } from "../pendingForm";
 
@@ -31,6 +31,8 @@ const NewCard = ({ params }: Params) => {
           description:
             "You can now record transactions and spending on this card",
         });
+        await sleep(2500);
+        window.location.reload();
       }
     },
   });

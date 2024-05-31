@@ -96,6 +96,8 @@ class Put {
   }
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 export {
   ActionsData,
   ToolsData,
@@ -104,4 +106,5 @@ export {
   Post,
   Get,
   Put,
+  sleep,
 };

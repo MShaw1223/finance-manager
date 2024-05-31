@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "../ui/use-toast";
 import { Params } from "@/utils/interface";
-import { Post as p } from "@/utils/helpful";
+import { Post as p, sleep } from "@/utils/helpful";
 import { useMutation } from "@tanstack/react-query";
 import { PendingNewRecipient } from "../pendingForm";
 
@@ -32,6 +32,8 @@ const NewRecipient = ({ params }: Params) => {
           description:
             "You can now record transactions to and from this recipient.",
         });
+        await sleep(2500);
+        window.location.reload();
       }
     },
   });

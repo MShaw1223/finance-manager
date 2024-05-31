@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
-import { Put } from "@/utils/helpful";
+import { Put, sleep } from "@/utils/helpful";
 import RecipientSelector from "./recipientSelect";
 import { recipientType } from "@/utils/types";
 import { useMutation } from "@tanstack/react-query";
@@ -26,6 +26,8 @@ const NewFavourite = ({ recipients }: { recipients: recipientType[] }) => {
         toast({
           title: `Successfully added to favourites !`,
         });
+        await sleep(2500);
+        window.location.reload();
       }
     },
   });
