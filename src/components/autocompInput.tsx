@@ -25,9 +25,7 @@ export default function AutoInput({
 }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
-  const [selectedRecipient, setSelectedRecipient] = useState<string | null>(
-    null
-  );
+  const [selectedRecipient, setSelectedRecipient] = useState<string>();
 
   const handleSelection = (recipientName: string) => {
     setValue(recipientName);
@@ -60,9 +58,9 @@ export default function AutoInput({
                 option === "in" ? "From" : "Recipient"
               }...`}
             />
-            <CommandEmpty>No recipients.</CommandEmpty>
             <CommandList>
               <CommandGroup heading="Favourites">
+                <CommandEmpty>No favourites.</CommandEmpty>
                 {recipients
                   .filter((recipient) => recipient.favourite)
                   .map((recipient) => (
@@ -83,6 +81,7 @@ export default function AutoInput({
                   ))}
               </CommandGroup>
               <CommandGroup heading="Others">
+                <CommandEmpty>No other recipients.</CommandEmpty>
                 {recipients
                   .filter((recipient) => !recipient.favourite)
                   .map((recipient) => (
