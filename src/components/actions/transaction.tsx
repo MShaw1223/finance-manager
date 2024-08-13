@@ -5,7 +5,6 @@ import { FormTabBar } from "./formTabs";
 import { Post as p } from "@/utils/helpful";
 import { TransactionParam } from "@/utils/interface";
 import { useMutation } from "@tanstack/react-query";
-import { PendingTransaction } from "../pendingForm";
 
 const Transaction = ({ params, recipients }: TransactionParam) => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
