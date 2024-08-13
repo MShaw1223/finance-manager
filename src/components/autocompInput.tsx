@@ -42,7 +42,7 @@ export default function AutoInput({
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="min-w-[190px] justify-between"
+            className="w-full justify-between"
             onClick={() => setOpen(!open)}
           >
             {selectedRecipient
