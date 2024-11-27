@@ -52,7 +52,10 @@ export default function Home({ params }: Params) {
       );
       const response = await getRecipients.get_array();
       const set = response.array;
-      setRecipients(set);
+      console.log("set value: ", set);
+      if (set) {
+        setRecipients(set);
+      }
     }
     // add any other gets here then pass as another set of params
     get_cards();
