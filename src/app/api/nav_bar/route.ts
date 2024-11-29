@@ -1,23 +1,18 @@
 import { extractBody } from "@/utils/extractBody";
-import { Pool } from "@neondatabase/serverless";
+import { neon } from "@neondatabase/serverless";
 import { NextRequest, NextResponse } from "next/server";
-import sqlstring from "sqlstring";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await extractBody(req);
     const { id } = body;
     if (id) {
-      const pool = new Pool({
-        connectionString: process.env.DATABASE_URL,
-      });
-      const sqlStatement = sqlstring.format(
-        "select username from users where uid = ?",
-        [id]
-      );
-      const done = await pool.query(sqlStatement);
-      await pool.end();
-      const user = done.rows[0].username;
+      const sql = neon(process.env.DATABASE_URL!);
+      const sqlStatement = sql("select username from users where uid = $1", [
+        id,
+      ]);
+      const done = await sqlStatement;
+      const user = done[0].username;
       return NextResponse.json({ user }, { status: 200 });
     } else if (id === undefined) {
       const user = "";

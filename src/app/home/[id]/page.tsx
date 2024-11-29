@@ -52,7 +52,6 @@ export default function Home({ params }: Params) {
       );
       const response = await getRecipients.get_array();
       const set = response.array;
-      console.log("set value: ", set);
       if (set) {
         setRecipients(set);
       }

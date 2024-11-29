@@ -1,21 +1,17 @@
 import { extractBody } from "@/utils/extractBody";
-import { Pool } from "@neondatabase/serverless";
+import { neon } from "@neondatabase/serverless";
 import { NextRequest, NextResponse } from "next/server";
-import sqlstring from "sqlstring";
 
 export async function POST(req: NextRequest) {
   try {
-    const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-    });
+    const sql = neon(process.env.DATABASE_URL!);
     const body = await extractBody(req);
     const { recipient_name, uid } = body;
-    const sqlStatement = sqlstring.format(
-      "insert into recipient (recipient_name, uid) values (?, ?)",
+    const sqlStatement = sql(
+      "insert into recipient (recipient_name, uid) values ($1, $2)",
       [recipient_name, uid]
     );
-    await pool.query(sqlStatement);
-    await pool.end();
+    await sqlStatement;
     return NextResponse.json({ status: 200 });
   } catch (e) {
     return NextResponse.json(`Error in recipient submission: ${e}`, {
@@ -26,17 +22,14 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
-    const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-    });
+    const sql = neon(process.env.DATABASE_URL!);
     const body = await extractBody(req);
     const { favourite, rid } = body;
-    const sqlStatement = sqlstring.format(
-      "UPDATE recipient SET favourite = ? WHERE rid = ?",
+    const sqlStatement = sql(
+      "UPDATE recipient SET favourite = $1 WHERE rid = $2",
       [favourite, rid]
     );
-    await pool.query(sqlStatement);
-    await pool.end();
+    await sqlStatement;
     return NextResponse.json({ status: 200 });
   } catch (e) {
     return NextResponse.json(`Error in recipient submission: ${e}`, {

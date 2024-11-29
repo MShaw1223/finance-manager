@@ -1,29 +1,26 @@
 import { extractBody } from "@/utils/extractBody";
-import { Pool } from "@neondatabase/serverless";
+import { neon } from "@neondatabase/serverless";
 import { NextRequest, NextResponse } from "next/server";
-import sqlstring from "sqlstring";
 
 export async function POST(req: NextRequest) {
   try {
-    const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-    });
+    const sql = neon(process.env.DATABASE_URL!);
     const body = await extractBody(req);
     const { transactionAmount, selectedCardId, value } = body;
     if (value.from === "") {
-      const newTransaction = sqlstring.format(
-        "insert into transactions (amount, cid, recipient) values (?, ?, ?)",
+      const newTransaction = sql(
+        "insert into transactions (amount, cid, recipient) values ($1, $2, $3)",
         [transactionAmount, selectedCardId, value.recipient]
       );
-      await pool.query(newTransaction);
+      await newTransaction;
     } else if (value.recipient === "") {
-      const newTransaction = sqlstring.format(
-        "insert into transactions (amount, cid, transaction_from) values (?, ?, ?)",
+      const newTransaction = sql(
+        "insert into transactions (amount, cid, transaction_from) values ($1, $2, $3)",
         [transactionAmount, selectedCardId, value.from]
       );
-      await pool.query(newTransaction);
+      await newTransaction;
     }
-    await pool.end();
+
     return NextResponse.json({ status: 200 });
   } catch (e) {
     return NextResponse.json(`Error in POST for new spend: ${e}`, {
